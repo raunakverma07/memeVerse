@@ -6,6 +6,8 @@ import {
   onValue
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 
+// ================= FIREBASE =================
+
 const firebaseConfig = {
   apiKey: "AIzaSyCPnVOiStDOJhbuzecrkuPJSL1VtnFrD94",
   authDomain: "cockroach-janata-party-1e3c7.firebaseapp.com",
@@ -19,7 +21,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-console.log("🔥 Firebase loaded successfully");
+// ================= UI ELEMENTS =================
 
 const username = document.getElementById("username");
 const postInput = document.getElementById("postInput");
@@ -27,15 +29,20 @@ const postBtn = document.getElementById("postBtn");
 const feedContainer = document.getElementById("feedContainer");
 const charCount = document.getElementById("charCount");
 
-// TEST UI
-postBtn.addEventListener("click", async () => {
-  console.log("📌 Button clicked");
+// ================= CHAR COUNT =================
 
-  const name = username.value || "Anonymous";
-  const message = postInput.value;
+postInput.addEventListener("input", () => {
+  charCount.textContent = `${postInput.value.length} / 400`;
+});
+
+// ================= POST =================
+
+postBtn.addEventListener("click", async () => {
+  const name = username.value.trim() || "Anonymous";
+  const message = postInput.value.trim();
 
   if (!message) {
-    alert("Empty message");
+    alert("Write something first");
     return;
   }
 
@@ -46,26 +53,31 @@ postBtn.addEventListener("click", async () => {
       time: Date.now()
     });
 
-    console.log("✅ Data pushed");
-
     postInput.value = "";
   } catch (e) {
-    console.log("❌ FIREBASE ERROR:", e);
+    console.log("ERROR:", e);
+    alert("Firebase error");
   }
 });
 
-onValue(ref(db, "posts"), (snapshot) => {
-  console.log("📡 Data received");
+// ================= REALTIME FEED =================
 
+onValue(ref(db, "posts"), (snapshot) => {
   feedContainer.innerHTML = "";
 
   const data = snapshot.val();
-
   if (!data) return;
 
-  Object.values(data).reverse().forEach((p) => {
+  Object.values(data).reverse().forEach((post) => {
     const div = document.createElement("div");
-    div.innerHTML = `<h4>${p.name}</h4><p>${p.message}</p>`;
+    div.className = "feed-card";
+
+    div.innerHTML = `
+      <h4>${post.name}</h4>
+      <p>${post.message}</p>
+      <small>Just now</small>
+    `;
+
     feedContainer.appendChild(div);
   });
 });
