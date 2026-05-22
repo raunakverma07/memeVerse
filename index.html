@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cockroach Janata Party</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+
+  <header class="navbar">
+    <div class="logo-section">
+      <img src="cklogo.jpg" alt="CJP Logo" class="logo" />
+
+      <div>
+        <h1>_Cockroach Janata Party</h1>
+        <p>_Less outrage. More ideas.</p>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#feed">Feed</a>
+      <a href="#polls">Polls</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+
+  <!-- ================= HERO SECTION ================= -->
+
+  <section class="hero">
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+      <span class="badge">Internet Experiment • Meme Democracy</span>
+
+      <h2>
+        Built for people tired of endless doomscrolling.
+      </h2>
+
+      <p>
+        Share memes, thoughts, public opinions and weirdly meaningful ideas.
+        No complicated signup. No fake seriousness.
+        Just internet people building something fun together.
+      </p>
+    
+      
+
+      <div class="hero-buttons">
+        <a href="#create-post" class="primary-btn">Start Posting</a>
+        <a href="#feed" class="secondary-btn">Explore Feed</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= POST CREATOR ================= -->
+
+  <section class="create-post" id="create-post">
+
+    <div class="section-heading">
+      <h3>Create a Post</h3>
+      <p>Drop your thoughts, memes, opinions or internet wisdom.</p>
+    </div>
+
+    <div class="post-card">
+
+      <div class="input-group">
+        <label>Your Name</label>
+        <input
+          type="text"
+          id="username"
+          placeholder="Anonymous Cockroach"
+          maxlength="25"
+        />
+      </div>
+
+      <div class="input-group">
+        <label>Your Thought</label>
+        <textarea
+          id="postInput"
+          placeholder="Type something legendary..."
+          maxlength="400"
+        ></textarea>
+      </div>
+
+      <div class="post-actions">
+        <span id="charCount">0 / 400</span>
+
+        <button id="postBtn">
+          🚀 Post to Janata
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================= LIVE FEED ================= -->
+
+  <section class="feed-section" id="feed">
+
+    <div class="section-heading">
+      <h3>Public Feed</h3>
+      <p>Live chaos from the internet janata.</p>
+    </div>
+
+
+    <div class="feed-container" id="feedContainer">
+
+      <!-- SAMPLE CARD -->
+
+      <div class="feed-card">
+
+        <div class="feed-top">
+          <div>
+            <h4>Raunak</h4>
+            <span>2 mins ago</span>
+          </div>
+
+          <div class="tag">Trending</div>
+        </div>
+
+        <p class="feed-text">
+          "Internet pe sirf outrage karne se better hai kuch build karna 💀"
+        </p>
+
+        <div class="reaction-bar">
+          <button>😂 12</button>
+          <button>🔥 8</button>
+          <button>💀 5</button>
+          <button>👍 19</button>
+        </div>
+
+      </div>
+
+
+      <div class="feed-card">
+
+        <div class="feed-top">
+          <div>
+            <h4>Anonymous</h4>
+            <span>5 mins ago</span>
+          </div>
+
+          <div class="tag green">Meme</div>
+        </div>
+
+        <p class="feed-text">
+          "Cockroach survives everything. Literally the mascot of internet users."
+        </p>
+
+        <div class="reaction-bar">
+          <button>😂 33</button>
+          <button>🔥 14</button>
+          <button>💀 21</button>
+          <button>👍 40</button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================= POLL SECTION ================= -->
+
+  <section class="poll-section" id="polls">
+
+    <div class="section-heading">
+      <h3>Daily Public Poll</h3>
+      <p>Purely scientific internet research.</p>
+    </div>
+
+    <div class="poll-card">
+
+      <h4>
+        What is the strongest survival skill in modern internet life?
+      </h4>
+
+      <div class="poll-options">
+
+        <button class="poll-btn">Ignoring negativity</button>
+        <button class="poll-btn">Unlimited chai</button>
+        <button class="poll-btn">Memes as therapy</button>
+        <button class="poll-btn">Becoming a cockroach</button>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================= ABOUT SECTION ================= -->
+
+  <section class="about-section" id="about">
+
+    <div class="section-heading">
+      <h3>What is this?</h3>
+    </div>
+
+    <div class="about-card">
+
+      <p>
+        Inspired by random internet chaos and the “Cockroach Janata Party” vibe,
+        this project is a small experiment to turn doomscrolling into something
+        creative, funny and slightly meaningful.
+      </p>
+
+      <p>
+        This is not a serious political movement.
+        It is simply a fun internet space where people can share ideas,
+        memes, opinions and discussions without unnecessary complexity.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+    <p>
+      Built by internet citizens • CJP © 2026
+    </p>
+  </footer>
+
+
+  <!-- ================= JS FILES ================= -->
+
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="script.js"></script>
+
+</body>
+</html>
+```
