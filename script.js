@@ -1,10 +1,37 @@
-import { db } from "./firebase.js";
+// ===============================
+// IMPORTS (FIREBASE MODULES)
+// ===============================
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 import {
+  getDatabase,
   ref,
   push,
   onValue
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
+
+
+// ===============================
+// FIREBASE CONFIG
+// ===============================
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCPnVOiStDOJhbuzecrkuPJSL1VtnFrD94",
+  authDomain: "cockroach-janata-party-1e3c7.firebaseapp.com",
+  databaseURL: "https://cockroach-janata-party-1e3c7-default-rtdb.firebaseio.com",
+  projectId: "cockroach-janata-party-1e3c7",
+  storageBucket: "cockroach-janata-party-1e3c7.firebasestorage.app",
+  messagingSenderId: "364671902639",
+  appId: "1:364671902639:web:54e112e2da31abba10c55a"
+};
+
+
+// ===============================
+// INIT FIREBASE
+// ===============================
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
 
 // ===============================
@@ -23,10 +50,7 @@ const charCount = document.getElementById("charCount");
 // ===============================
 
 postInput.addEventListener("input", () => {
-
-  charCount.textContent =
-    `${postInput.value.length} / 400`;
-
+  charCount.textContent = `${postInput.value.length} / 400`;
 });
 
 
@@ -35,22 +59,16 @@ postInput.addEventListener("input", () => {
 // ===============================
 
 function createPostCard(name, message) {
-
   const card = document.createElement("div");
-
   card.classList.add("feed-card");
 
   card.innerHTML = `
-
     <div class="feed-top">
-
       <div>
         <h4>${name}</h4>
         <span>Just now</span>
       </div>
-
       <div class="tag">Public</div>
-
     </div>
 
     <p class="feed-text">
@@ -63,64 +81,47 @@ function createPostCard(name, message) {
       <button>💀</button>
       <button>👍</button>
     </div>
-
   `;
 
   feedContainer.prepend(card);
-
 }
 
 
 // ===============================
-// POST BUTTON
+// POST BUTTON CLICK
 // ===============================
 
 postBtn.addEventListener("click", async () => {
 
-  const name =
-    username.value.trim() || "Anonymous";
+  const name = username.value.trim() || "Anonymous";
+  const message = postInput.value.trim();
 
-  const message =
-    postInput.value.trim();
-
-  if(message === ""){
-
+  if (message === "") {
     alert("Write something first.");
-
     return;
   }
 
-  try{
-
+  try {
     const postsRef = ref(db, "posts");
 
     await push(postsRef, {
-
       name: name,
       message: message,
       time: Date.now()
-
     });
 
     postInput.value = "";
-
     charCount.textContent = "0 / 400";
 
+  } catch (error) {
+    console.error("WRITE ERROR:", error);
+    alert("Error posting. Check console.");
   }
-
-  catch(error){
-
-    console.error(error);
-
-    alert("Error posting.");
-
-  }
-
 });
 
 
 // ===============================
-// REALTIME POSTS
+// REALTIME FEED
 // ===============================
 
 const postsRef = ref(db, "posts");
@@ -131,21 +132,13 @@ onValue(postsRef, (snapshot) => {
 
   const data = snapshot.val();
 
-  if(data){
-
+  if (data) {
     const postsArray = Object.values(data);
 
     postsArray.reverse();
 
     postsArray.forEach((post) => {
-
-      createPostCard(
-        post.name,
-        post.message
-      );
-
+      createPostCard(post.name, post.message);
     });
-
   }
-
 });
